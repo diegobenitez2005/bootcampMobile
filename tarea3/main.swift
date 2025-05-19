@@ -95,6 +95,9 @@ class Reloj {
            self.minutos = (totalSegundos % 3600) / 60
            self.segundos = totalSegundos % 60
        }
+    func esMediodia() -> Bool {
+        return self.horas == 12 && self.minutos == 0 && self.segundos == 0
+        }
 }
 
 
@@ -123,6 +126,7 @@ class RelojDemo {
         relojito.restaReloj(segundoReloj: relojitoParaResta)
         print("Luego de restar:")
         print(relojito.toString())
+        print(relojito.esMediodia()) //false
     }
 }
 
