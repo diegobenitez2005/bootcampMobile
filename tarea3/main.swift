@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+//Algo
 class Reloj {
     private var horas:Int
     private var minutos:Int
