@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+//Algo
 class Reloj {
     private var horas:Int
     private var minutos:Int
@@ -75,6 +75,11 @@ class Reloj {
             self.horas -= 1
         }
     }
+    
+    func esMediodia() -> Bool {
+    return self.horas == 12 && self.minutos == 0 && self.segundos == 0
+    }   
+
     func toString() -> String {
         return String(format: "%02d:%02d:%02d",self.horas,self.minutos,self.segundos)
     }
@@ -123,6 +128,11 @@ class RelojDemo {
         relojito.restaReloj(segundoReloj: relojitoParaResta)
         print("Luego de restar:")
         print(relojito.toString())
+        if relojito.esMediodia() {
+            print("Es mediodía.")
+        } else {
+            print("No es mediodía.")
+        }
     }
 }
 
