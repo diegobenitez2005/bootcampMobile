@@ -7,7 +7,8 @@
 
 import Foundation
 
-
+//Algo
+//Prueba de crear otra rama y hacer un cambio
 class Reloj {
     private var horas:Int
     private var minutos:Int
@@ -75,6 +76,11 @@ class Reloj {
             self.horas -= 1
         }
     }
+    
+    func esMediodia() -> Bool {
+    return self.horas == 12 && self.minutos == 0 && self.segundos == 0
+    }   
+
     func toString() -> String {
         return String(format: "%02d:%02d:%02d",self.horas,self.minutos,self.segundos)
     }
@@ -95,9 +101,6 @@ class Reloj {
            self.minutos = (totalSegundos % 3600) / 60
            self.segundos = totalSegundos % 60
        }
-    func esMediodia() -> Bool {
-        return self.horas == 12 && self.minutos == 0 && self.segundos == 0
-        }
 }
 
 
@@ -126,8 +129,12 @@ class RelojDemo {
         relojito.restaReloj(segundoReloj: relojitoParaResta)
         print("Luego de restar:")
         print(relojito.toString())
+rama-merge-practica
         print(relojito.esMediodia()) //false
         print("HOLA MUNDASO")
+
+
+main
     }
 }
 
