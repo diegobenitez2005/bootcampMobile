@@ -129,11 +129,12 @@ class RelojDemo {
         relojito.restaReloj(segundoReloj: relojitoParaResta)
         print("Luego de restar:")
         print(relojito.toString())
-        if relojito.esMediodia() {
-            print("Es mediodía.")
-        } else {
-            print("No es mediodía.")
-        }
+rama-merge-practica
+        print(relojito.esMediodia()) //false
+        print("HOLA MUNDASO")
+
+
+main
     }
 }
 
