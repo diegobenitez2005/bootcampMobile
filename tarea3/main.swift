@@ -127,6 +127,7 @@ class RelojDemo {
         print("Luego de restar:")
         print(relojito.toString())
         print(relojito.esMediodia()) //false
+        print("HOLA MUNDASO")
     }
 }
 
