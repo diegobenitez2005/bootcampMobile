@@ -1,0 +1,40 @@
+# Archivos generados por Xcode
+DerivedData/
+build/
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/xcshareddata/
+
+# Archivos de usuario
+*.xcuserstate
+*.xcuserdata/
+*.DS_Store
+
+# SwiftPM (Swift Package Manager)
+.swiftpm/
+Package.resolved
+
+# Archivos temporales
+*.swp
+*.tmp
+*.log
+
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Archivos de sistema
+Icon?
+._*
+
+# Archivos de backup
+*.bak
+*.old
+*.orig
+
+# Editor config (opcional)
+.idea/
+.vscode/
+
