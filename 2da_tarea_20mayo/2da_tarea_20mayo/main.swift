@@ -84,9 +84,8 @@ func esColor(_ mano: [Carta]) -> Bool {
 }
 
 func esEscalera(_ mano: [Carta]) -> Bool {
-    var valores = mano.map { valorNumerico($0.valor) ?? 0}.sorted()
+    let valores = mano.map { valorNumerico($0.valor) ?? 0}.sorted()
     
-    // Soporte para escalera baja A-2-3-4-5
     if Set(valores) == Set([14, 2, 3, 4, 5]) {
         return true
     }
@@ -150,5 +149,5 @@ for _ in 0..<5 {
 }
 
 print("Mano: \(mano)")
-print("Jugada detectada: \(verificarCaso(mano: mano))")
+print("Jugada: \(verificarCaso(mano: mano))")
 
