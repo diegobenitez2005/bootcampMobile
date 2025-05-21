@@ -66,9 +66,11 @@ class Mazo {
         print(mazo)
     }
 }
-func valorNumerico (_ valor: Valores) -> Int? {
+
+func valorNumerico(_ valor: Valores) -> Int? {
     return Int(valor.rawValue) ?? 0
 }
+
 func contarValores(_ mano: [Carta]) -> [Int: Int] {
     var cuenta: [Int: Int] = [:]
     for carta in mano {
@@ -84,12 +86,12 @@ func esColor(_ mano: [Carta]) -> Bool {
 }
 
 func esEscalera(_ mano: [Carta]) -> Bool {
-    let valores = mano.map { valorNumerico($0.valor) ?? 0}.sorted()
-    
+    let valores = mano.map { valorNumerico($0.valor) ?? 0 }.sorted()
+
     if Set(valores) == Set([14, 2, 3, 4, 5]) {
         return true
     }
-    
+
     for i in 0..<valores.count - 1 {
         if valores[i + 1] - valores[i] != 1 {
             return false
@@ -124,6 +126,7 @@ func esPar(_ mano: [Carta]) -> Bool {
     let pares = contarValores(mano).filter { $0.value == 2 }
     return pares.count == 1
 }
+
 func verificarCaso(mano: [Carta]) -> String {
     if esEscaleraColor(mano) { return "Escalera de Color" }
     if esPoker(mano) { return "Póker" }
@@ -136,18 +139,85 @@ func verificarCaso(mano: [Carta]) -> String {
     return "Carta Alta"
 }
 
+func obtenerValoresImportantes(_ mano: [Carta]) -> [Int] {
+    let cuenta = contarValores(mano)
+
+    let valores = cuenta.sorted {
+        if $0.value != $1.value {
+            return $0.value > $1.value
+        } else {
+            return $0.key > $1.key
+        }
+    }.map { $0.key }
+
+    return valores
+}
+
+func compararJugadasIguales(_ manoRojo: [Carta], _ manoNegro: [Carta]) -> String {
+    let valoresRojo = obtenerValoresImportantes(manoRojo)
+    let valoresNegro = obtenerValoresImportantes(manoNegro)
+
+    for i in 0..<min(valoresRojo.count, valoresNegro.count) {
+        if valoresRojo[i] > valoresNegro[i] {
+            return "Rojo gana por valor de jugada!"
+        } else if valoresRojo[i] < valoresNegro[i] {
+            return "Negro gana por valor de jugada!"
+        }
+    }
+
+    return "Empate por valor de jugada!"
+}
+
+func verificarGanador(_ jugadaRojo: String, _ jugadaNegro: String) -> String {
+    let jerarquiaJugadas: [String: Int] =
+        [
+            "Escalera de Color": 9,
+            "Póker": 8,
+            "Full": 7,
+            "Color": 6,
+            "Escalera": 5,
+            "Trío": 4,
+            "Par Doble": 3,
+            "Par": 2,
+            "Carta Alta": 1,
+        ]
+    let valorRojo = jerarquiaJugadas[jugadaRojo] ?? 0
+    let valorNegro = jerarquiaJugadas[jugadaNegro] ?? 0
+
+    if valorRojo > valorNegro {
+        return "Rojo gana!!"
+    } else if valorRojo < valorNegro {
+        return "Negro gana!!"
+    } else {
+        // Si es empate por tipo de jugada, comparar valores relevantes
+        return compararJugadasIguales(manoRojo, manoNegro)
+    }
+}
 
 let mazo = Mazo()
 mazo.reset()
 mazo.barajar()
 
-var mano: [Carta] = []
+var manoRojo: [Carta] = []
 for _ in 0..<5 {
     if let carta = mazo.repartir() {
-        mano.append(carta)
+        manoRojo.append(carta)
+    }
+}
+var manoNegro: [Carta] = []
+for _ in 0..<5 {
+    if let carta = mazo.repartir() {
+        manoNegro.append(carta)
     }
 }
 
-print("Mano: \(mano)")
-print("Jugada: \(verificarCaso(mano: mano))")
+var jugadaRojo: String = verificarCaso(mano: manoRojo)
+var jugadaNegro: String = verificarCaso(mano: manoNegro)
 
+print("Mano Roja: \(manoRojo)")
+print("Jugada: \(verificarCaso(mano: manoRojo))")
+
+print("Mano Negra: \(manoNegro)")
+print("Jugada: \(verificarCaso(mano: manoNegro))")
+
+print(verificarGanador(jugadaRojo, jugadaNegro))
